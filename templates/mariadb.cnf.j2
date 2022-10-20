@@ -47,6 +47,11 @@ binlog_ignore_db = {{ db.name }}
 read_only
 relay-log = relay-bin
 relay-log-index = relay-bin.index
+{% for db in mariadb_databases %}
+{% if db.replicate|default(false) %}
+replicate_do_db = {{ db.name }}
+{% endif %}
+{% endfor %}
 {% endif %}
 {% endif -%}
 
