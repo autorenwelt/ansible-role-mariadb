@@ -30,7 +30,8 @@
   ansible.builtin.import_tasks: users.yml
   when:
     - mariadb_users is defined
-    - mariadb_replication_role != "replica"
+    # since we're not longer replicating the mysql db, the users hav to be created on replicas.
+    # - mariadb_replication_role != "replica"
 
 - name: Include task replication_primary.yml
   ansible.builtin.import_tasks: replication_primary.yml
